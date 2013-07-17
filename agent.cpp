@@ -10,7 +10,7 @@
 */
 
 #include "agent.h"
-#include <cassert>
+
 
 /*
  Default Constructor.

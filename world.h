@@ -14,13 +14,15 @@
 #include "constants.h"
 #include "agent.h"
 #include "predator.h"
-#include "wall.h"
+//#include "finch.h"
 #include "cell.h"
-#include "helper_fcns.h"
 #include <vector>
-//#include "helper_fcns.h"
+#include "helper_fcns.h"
 #include <iostream>
 #include <fstream>
+#include <ctime>
+#include <cstdlib>
+#include <cstddef>
 
 void ab4_update(agent smith);
 void euler_update(agent &smith);
@@ -38,17 +40,18 @@ public:
     ~world();
     
     void print(std::ostream& strm);
-    void print_csv(std::string filename);
+    
     void add_agent(double x, double y);
     void add_agent(double x, double y, void (* up)(agent*,agent*));
     void add_predator(double x, double y, void (* up)(agent*,agent*));
     void add_agent(double x, double y, double z, void (* up)(agent*,agent*));
-	void add_wall(double c_x, double c_y, double n_x, double n_y, double len, void (* up)(agent*,agent*));
-	void add_boundary(void (* up)(agent*,agent*));
+//	void add_finch_rand(double x, double y, void (* up)(agent*,agent*));
+
     void populate_rand();
-    void populate(int n, vector<double>& xpos, vector<double>& ypos, void (* up)(agent*,agent*));
+	void populate(int n, vector<double>& xpos, vector<double>& ypos, void (* up)(agent*,agent*));
     void populate_rand(int n, void (* up)(agent*,agent*));
     void populate_predator_rand(int n, void (* up)(agent*,agent*));
+//	void populate_finches_rand(int n, void (* up)(agent*,agent*));
     void refresh_ab4();
     void refresh_eul();
     void move_to_cell();
@@ -56,6 +59,10 @@ public:
     void update_forward_velocs();
     void update_agent_pos_euler();
     void update_agent_pos_ab4();
+
+	void run(std::ostream& strm, int print_every, int iterations);
+
+
 
     cell* get_cell(int i, int j);
     int is_empty(int i, int j);
